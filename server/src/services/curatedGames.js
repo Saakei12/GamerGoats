@@ -1273,5 +1273,375 @@ export const curatedGames = [
       storage: "3.5 GB available space"
     },
     source: "curated"
+  },
+{
+    "id": "curated-cs2",
+    "slug": "counter-strike-2",
+    "title": "Counter-Strike 2",
+    "steam_app_id": "730",
+    "short_description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players worldwide.",
+    "description": "Counter-Strike 2 is the largest technical leap forward in Counter-Strike history, ensuring new features and updates for years to come. Built on the Source 2 engine with overhauled maps, responsive smoke grenades, sub-tick updates, and refined audio-visual feedback.",
+    "genres": [
+      "Shooter",
+      "Action"
+    ],
+    "tags": [
+      "FPS",
+      "Shooter",
+      "Competitive",
+      "Online Multiplayer",
+      "PvP",
+      "Action",
+      "Free to Play"
+    ],
+    "gameplay_tags": [
+      "Competitive",
+      "Shooter"
+    ],
+    "multiplayer_mode": [
+      "Online Multiplayer",
+      "PvP",
+      "Co-op"
+    ],
+    "visual_style": [
+      "Realistic"
+    ],
+    "hardware_tier": "Mid-Range PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/ss_e1da629e4b6c31cae9a0e676d498aa255ca8a4cf.1920x1080.jpg",
+    "logo": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/logo.png",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/ss_e1da629e4b6c31cae9a0e676d498aa255ca8a4cf.1920x1080.jpg"
+    ],
+    "release_date": "2023-09-27",
+    "platforms": [
+      "PC (Windows)"
+    ],
+    "rating": 88,
+    "rating_count": 8200000,
+    "official_url": "https://store.steampowered.com/app/730/CounterStrike_2/",
+    "developer": "Valve",
+    "publisher": "Valve",
+    "source": "curated"
+  },
+  {
+    "id": "curated-dota-2",
+    "slug": "dota-2",
+    "title": "Dota 2",
+    "steam_app_id": "570",
+    "short_description": "Every day, millions of players worldwide enter battle as one of over a hundred Dota heroes in competitive 5v5 MOBA action.",
+    "description": "Every day, millions of players worldwide enter battle as one of over a hundred Dota heroes. And no matter if it is their 10th hour of play or 1,000th, there is always something new to discover. With regular updates that ensure a constant evolution of gameplay, features, and heroes, Dota 2 has taken on a life of its own.",
+    "genres": [
+      "Strategy",
+      "Action",
+      "RPG"
+    ],
+    "tags": [
+      "MOBA",
+      "Strategy",
+      "Competitive",
+      "Online Multiplayer",
+      "PvP",
+      "Co-op",
+      "Free to Play"
+    ],
+    "gameplay_tags": [
+      "MOBA",
+      "Competitive"
+    ],
+    "multiplayer_mode": [
+      "Online Multiplayer",
+      "PvP",
+      "Co-op"
+    ],
+    "visual_style": [
+      "Stylized"
+    ],
+    "hardware_tier": "Low-End PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/ss_891e4a3c26ea680ce6ecda34bf385b2e6fbfa4fb.1920x1080.jpg",
+    "logo": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/logo.png",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/ss_891e4a3c26ea680ce6ecda34bf385b2e6fbfa4fb.1920x1080.jpg"
+    ],
+    "release_date": "2013-07-09",
+    "platforms": [
+      "PC (Windows)",
+      "Mac"
+    ],
+    "rating": 90,
+    "rating_count": 2200000,
+    "official_url": "https://store.steampowered.com/app/570/Dota_2/",
+    "developer": "Valve",
+    "publisher": "Valve",
+    "source": "curated"
+  },
+  {
+    "id": "curated-apex-legends",
+    "slug": "apex-legends",
+    "title": "Apex Legends",
+    "steam_app_id": "1172470",
+    "short_description": "Conquer with character in Apex Legends, a free-to-play Hero shooter where legendary characters with powerful abilities team up to battle for fame & fortune.",
+    "description": "Conquer with character in Apex Legends, a free-to-play Hero shooter where legendary characters with powerful abilities team up to battle for fame & fortune on the fringes of the Frontier. Master an ever-growing roster of diverse Legends, deep tactical squad play and bold new innovations.",
+    "genres": [
+      "Shooter",
+      "Action"
+    ],
+    "tags": [
+      "Battle Royale",
+      "Hero Shooter",
+      "FPS",
+      "Online Multiplayer",
+      "PvP",
+      "Co-op",
+      "Free to Play"
+    ],
+    "gameplay_tags": [
+      "Battle Royale",
+      "Fast-Paced"
+    ],
+    "multiplayer_mode": [
+      "Online Multiplayer",
+      "PvP",
+      "Co-op"
+    ],
+    "visual_style": [
+      "Realistic"
+    ],
+    "hardware_tier": "Mid-Range PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/ss_072dfec5344cba3ebf9c3ff2e032d849dfb3e404.1920x1080.jpg",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/ss_072dfec5344cba3ebf9c3ff2e032d849dfb3e404.1920x1080.jpg"
+    ],
+    "release_date": "2020-11-04",
+    "platforms": [
+      "PC (Windows)"
+    ],
+    "rating": 88,
+    "rating_count": 900000,
+    "official_url": "https://store.steampowered.com/app/1172470/Apex_Legends/",
+    "developer": "Respawn Entertainment",
+    "publisher": "Electronic Arts",
+    "source": "curated"
+  },
+  {
+    "id": "curated-warframe",
+    "slug": "warframe",
+    "title": "Warframe",
+    "steam_app_id": "230410",
+    "short_description": "Awaken as an unstoppable warrior and battle alongside your friends in this story-driven free-to-play action MMORPG.",
+    "description": "Confront warring factions throughout a sprawling interplanetary system as you follow the guidance of the mysterious Lotus and level up your Warframe, build an Arsenal of destructive firepower, and realize your true potential across massive open worlds.",
+    "genres": [
+      "Action",
+      "RPG"
+    ],
+    "tags": [
+      "Action RPG",
+      "Third-Person Shooter",
+      "Co-op",
+      "Sci-Fi",
+      "Free to Play",
+      "Online Multiplayer"
+    ],
+    "gameplay_tags": [
+      "Loot & Progression",
+      "Fast-Paced Action"
+    ],
+    "multiplayer_mode": [
+      "Co-op",
+      "Online Multiplayer",
+      "Single Player"
+    ],
+    "visual_style": [
+      "Realistic"
+    ],
+    "hardware_tier": "Mid-Range PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/ss_f73d2ff9ce959aa3891404c00067c296ef137f84.1920x1080.jpg",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/ss_f73d2ff9ce959aa3891404c00067c296ef137f84.1920x1080.jpg"
+    ],
+    "release_date": "2013-03-25",
+    "platforms": [
+      "PC (Windows)"
+    ],
+    "rating": 86,
+    "rating_count": 580000,
+    "official_url": "https://store.steampowered.com/app/230410/Warframe/",
+    "developer": "Digital Extremes",
+    "publisher": "Digital Extremes",
+    "source": "curated"
+  },
+  {
+    "id": "curated-destiny-2",
+    "slug": "destiny-2",
+    "title": "Destiny 2",
+    "steam_app_id": "1085660",
+    "short_description": "Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat.",
+    "description": "Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian look and playstyle.",
+    "genres": [
+      "Shooter",
+      "Action",
+      "RPG"
+    ],
+    "tags": [
+      "FPS",
+      "Looter Shooter",
+      "Co-op",
+      "Online Multiplayer",
+      "Sci-Fi",
+      "PvP",
+      "Free to Play"
+    ],
+    "gameplay_tags": [
+      "Loot & Progression",
+      "Shooter"
+    ],
+    "multiplayer_mode": [
+      "Co-op",
+      "Online Multiplayer",
+      "PvP"
+    ],
+    "visual_style": [
+      "Realistic"
+    ],
+    "hardware_tier": "Mid-Range PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1085660/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1085660/ss_3da43878b3ce3c267b2d56a0d2f094dbfc495251.1920x1080.jpg",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1085660/ss_3da43878b3ce3c267b2d56a0d2f094dbfc495251.1920x1080.jpg"
+    ],
+    "release_date": "2019-10-01",
+    "platforms": [
+      "PC (Windows)"
+    ],
+    "rating": 83,
+    "rating_count": 620000,
+    "official_url": "https://store.steampowered.com/app/1085660/Destiny_2/",
+    "developer": "Bungie",
+    "publisher": "Bungie",
+    "source": "curated"
+  },
+  {
+    "id": "curated-pubg",
+    "slug": "pubg-battlegrounds",
+    "title": "PUBG: BATTLEGROUNDS",
+    "steam_app_id": "578080",
+    "short_description": "Land on strategic locations, loot weapons and supplies, and survive to become the last team standing across diverse Battlegrounds.",
+    "description": "Play PUBG: BATTLEGROUNDS for free. Land on strategic locations, loot weapons and supplies, and survive to become the last team standing across various, diverse Battlegrounds. Squad up and join the Battlegrounds for the original Battle Royale experience that only PUBG: BATTLEGROUNDS can offer.",
+    "genres": [
+      "Shooter",
+      "Action"
+    ],
+    "tags": [
+      "Battle Royale",
+      "Shooter",
+      "Survival",
+      "PvP",
+      "Online Multiplayer",
+      "Co-op",
+      "Free to Play"
+    ],
+    "gameplay_tags": [
+      "Survival",
+      "Tactical"
+    ],
+    "multiplayer_mode": [
+      "Online Multiplayer",
+      "PvP",
+      "Co-op"
+    ],
+    "visual_style": [
+      "Realistic"
+    ],
+    "hardware_tier": "Mid-Range PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/ss_752a926a8d790757753443a7a97262ff252875c7.1920x1080.jpg",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/ss_752a926a8d790757753443a7a97262ff252875c7.1920x1080.jpg"
+    ],
+    "release_date": "2017-12-21",
+    "platforms": [
+      "PC (Windows)"
+    ],
+    "rating": 80,
+    "rating_count": 2400000,
+    "official_url": "https://store.steampowered.com/app/578080/PUBG_BATTLEGROUNDS/",
+    "developer": "KRAFTON, Inc.",
+    "publisher": "KRAFTON, Inc.",
+    "source": "curated"
+  },
+  {
+    "id": "curated-tf2",
+    "slug": "team-fortress-2",
+    "title": "Team Fortress 2",
+    "steam_app_id": "440",
+    "short_description": "Nine distinct classes provide a broad range of tactical abilities and personalities in this celebrated free-to-play team shooter.",
+    "description": "One of the most popular online action games of all time, Team Fortress 2 delivers constant free updates—new game modes, maps, equipment and, most importantly, hats. Nine distinct classes provide a broad range of tactical abilities and personalities, and lend themselves to a variety of player skills.",
+    "genres": [
+      "Shooter",
+      "Action"
+    ],
+    "tags": [
+      "Hero Shooter",
+      "FPS",
+      "Classic",
+      "Co-op",
+      "Online Multiplayer",
+      "PvP",
+      "Free to Play"
+    ],
+    "gameplay_tags": [
+      "Hero Shooter",
+      "Tactical"
+    ],
+    "multiplayer_mode": [
+      "Online Multiplayer",
+      "PvP",
+      "Co-op"
+    ],
+    "visual_style": [
+      "Stylized"
+    ],
+    "hardware_tier": "Low-End PC",
+    "price": "Free",
+    "is_aaa": true,
+    "is_classic": true,
+    "is_free": true,
+    "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/header.jpg",
+    "background_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/ss_91e028b030b42f618a80d56574caab161eef3dc9.1920x1080.jpg",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/ss_91e028b030b42f618a80d56574caab161eef3dc9.1920x1080.jpg"
+    ],
+    "release_date": "2007-10-10",
+    "platforms": [
+      "PC (Windows)",
+      "Mac"
+    ],
+    "rating": 92,
+    "rating_count": 1050000,
+    "official_url": "https://store.steampowered.com/app/440/Team_Fortress_2/",
+    "developer": "Valve",
+    "publisher": "Valve",
+    "source": "curated"
   }
 ];

@@ -24,15 +24,140 @@ export async function fetchTrendingGames(limit = 10): Promise<Game[]> {
   }
 }
 
+const EMERGENCY_FREE_GAMES: Game[] = [
+  {
+    id: 'curated-cs2',
+    slug: 'counter-strike-2',
+    title: 'Counter-Strike 2',
+    short_description: 'For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players worldwide.',
+    genres: ['Shooter', 'Action'],
+    tags: ['FPS', 'Shooter', 'Competitive', 'Online Multiplayer', 'PvP', 'Action', 'Free to Play'],
+    thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg',
+    background_image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/ss_e1da629e4b6c31cae9a0e676d498aa255ca8a4cf.1920x1080.jpg',
+    release_date: '2023-09-27',
+    platforms: ['PC (Windows)'],
+    rating: 88,
+    is_free: true,
+    developer: 'Valve',
+    publisher: 'Valve',
+    source: 'curated',
+    official_url: 'https://store.steampowered.com/app/730/CounterStrike_2/'
+  },
+  {
+    id: 'curated-dota-2',
+    slug: 'dota-2',
+    title: 'Dota 2',
+    short_description: 'Every day, millions of players worldwide enter battle as one of over a hundred Dota heroes in competitive 5v5 MOBA action.',
+    genres: ['Strategy', 'Action', 'RPG'],
+    tags: ['MOBA', 'Strategy', 'Competitive', 'Online Multiplayer', 'PvP', 'Co-op', 'Free to Play'],
+    thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/header.jpg',
+    background_image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/ss_891e4a3c26ea680ce6ecda34bf385b2e6fbfa4fb.1920x1080.jpg',
+    release_date: '2013-07-09',
+    platforms: ['PC (Windows)', 'Mac'],
+    rating: 90,
+    is_free: true,
+    developer: 'Valve',
+    publisher: 'Valve',
+    source: 'curated',
+    official_url: 'https://store.steampowered.com/app/570/Dota_2/'
+  },
+  {
+    id: 'curated-apex-legends',
+    slug: 'apex-legends',
+    title: 'Apex Legends',
+    short_description: 'Conquer with character in Apex Legends, a free-to-play Hero shooter where legendary characters with powerful abilities team up.',
+    genres: ['Shooter', 'Action'],
+    tags: ['Battle Royale', 'Hero Shooter', 'FPS', 'Online Multiplayer', 'PvP', 'Co-op', 'Free to Play'],
+    thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/header.jpg',
+    background_image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/ss_072dfec5344cba3ebf9c3ff2e032d849dfb3e404.1920x1080.jpg',
+    release_date: '2020-11-04',
+    platforms: ['PC (Windows)'],
+    rating: 88,
+    is_free: true,
+    developer: 'Respawn Entertainment',
+    publisher: 'Electronic Arts',
+    source: 'curated',
+    official_url: 'https://store.steampowered.com/app/1172470/Apex_Legends/'
+  },
+  {
+    id: 'curated-warframe',
+    slug: 'warframe',
+    title: 'Warframe',
+    short_description: 'Awaken as an unstoppable warrior and battle alongside your friends in this story-driven free-to-play action MMORPG.',
+    genres: ['Action', 'RPG'],
+    tags: ['Action RPG', 'Third-Person Shooter', 'Co-op', 'Sci-Fi', 'Free to Play', 'Online Multiplayer'],
+    thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg',
+    background_image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/ss_f73d2ff9ce959aa3891404c00067c296ef137f84.1920x1080.jpg',
+    release_date: '2013-03-25',
+    platforms: ['PC (Windows)'],
+    rating: 86,
+    is_free: true,
+    developer: 'Digital Extremes',
+    publisher: 'Digital Extremes',
+    source: 'curated',
+    official_url: 'https://store.steampowered.com/app/230410/Warframe/'
+  },
+  {
+    id: 'curated-tf2',
+    slug: 'team-fortress-2',
+    title: 'Team Fortress 2',
+    short_description: 'Nine distinct classes provide a broad range of tactical abilities and personalities in this celebrated free-to-play team shooter.',
+    genres: ['Shooter', 'Action'],
+    tags: ['Hero Shooter', 'FPS', 'Classic', 'Co-op', 'Online Multiplayer', 'PvP', 'Free to Play'],
+    thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/header.jpg',
+    background_image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/440/ss_91e028b030b42f618a80d56574caab161eef3dc9.1920x1080.jpg',
+    release_date: '2007-10-10',
+    platforms: ['PC (Windows)', 'Mac'],
+    rating: 92,
+    is_free: true,
+    developer: 'Valve',
+    publisher: 'Valve',
+    source: 'curated',
+    official_url: 'https://store.steampowered.com/app/440/Team_Fortress_2/'
+  },
+  {
+    id: 'curated-pubg',
+    slug: 'pubg-battlegrounds',
+    title: 'PUBG: BATTLEGROUNDS',
+    short_description: 'Land on strategic locations, loot weapons and supplies, and survive to become the last team standing across diverse Battlegrounds.',
+    genres: ['Shooter', 'Action'],
+    tags: ['Battle Royale', 'Shooter', 'Survival', 'PvP', 'Online Multiplayer', 'Co-op', 'Free to Play'],
+    thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg',
+    background_image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/578080/ss_752a926a8d790757753443a7a97262ff252875c7.1920x1080.jpg',
+    release_date: '2017-12-21',
+    platforms: ['PC (Windows)'],
+    rating: 80,
+    is_free: true,
+    developer: 'KRAFTON, Inc.',
+    publisher: 'KRAFTON, Inc.',
+    source: 'curated',
+    official_url: 'https://store.steampowered.com/app/578080/PUBG_BATTLEGROUNDS/'
+  }
+];
+
 export async function fetchFreeGames(limit = 12): Promise<Game[]> {
   try {
     const res = await fetch(`${API_BASE}/free?limit=${limit}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) return data;
+    }
   } catch (err) {
     console.error('Failed to fetch free games:', err);
-    return [];
   }
+
+  // Fault-tolerant secondary fallback if external API is slow or cold-starting
+  try {
+    const searchRes = await fetch(`${API_BASE}/search?tag=Free to Play&limit=${limit}`);
+    if (searchRes.ok) {
+      const data = await searchRes.json();
+      if (Array.isArray(data?.games) && data.games.length > 0) {
+        return data.games;
+      }
+    }
+  } catch {}
+
+  return EMERGENCY_FREE_GAMES.slice(0, limit);
 }
 
 export async function fetchPaidGames(limit = 16): Promise<Game[]> {
