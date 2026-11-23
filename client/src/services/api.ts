@@ -1,6 +1,6 @@
 import type { Game, GenreItem, SearchResponse, TagCategories } from '../types/game';
 
-const API_BASE = '/api/games';
+const API_BASE = (import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/games` : '/api/games');
 
 export async function fetchFeaturedGame(): Promise<Game | null> {
   try {

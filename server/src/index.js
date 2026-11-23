@@ -53,13 +53,19 @@ setInterval(() => {
 async function startServer() {
   await aggregator.init();
 
-  app.listen(config.port, () => {
-    console.log(`[GamerGoats] Server running on http://localhost:${config.port}`);
-  });
+  if (process.env.NODE_ENV !== 'test') {
+    app.listen(config.port, () => {
+      console.log(`[GamerGoats] Server running on http://localhost:${config.port}`);
+    });
+  }
 }
+
+// Ensure aggregator initializes for both standalone and serverless environments
+aggregator.init().catch(err => console.error('[Aggregator] Init failed:', err));
 
 startServer().catch(err => {
   console.error('Failed to start server:', err);
-  process.exit(1);
 });
+
+export default app;
 
