@@ -35,7 +35,9 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       ? (game.background_image || game.thumbnail || (game.screenshots && game.screenshots[0]) || '')
       : (image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80');
 
-    const computedUrl = url || window.location.href;
+    const prodDomain = 'https://gamergoats.online';
+    const path = typeof window !== 'undefined' ? (window.location.pathname + window.location.search) : '';
+    const computedUrl = url || (game ? `${prodDomain}/game/${game.slug || game.id}` : `${prodDomain}${path === '/' ? '' : path}`);
 
     const baseKeywords = [
       'PC games',

@@ -3,5 +3,5 @@ User-agent: *
 Allow: /
 
 # Sitemap Index
-Sitemap: https://gamergoats.com/sitemap.xml
+Sitemap: https://gamergoats.online/sitemap.xml
 

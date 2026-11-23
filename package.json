@@ -5,8 +5,8 @@
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ../server && npm install",
     "start": "node server/src/index.js",
+    "generate:sitemap": "node server/scripts/generateSitemap.js",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev"
   }
 }
-
