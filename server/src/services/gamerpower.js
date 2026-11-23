@@ -3,7 +3,10 @@ const GAMERPOWER_BASE = 'https://www.gamerpower.com/api';
 export async function fetchGamerPowerGiveaways() {
   try {
     const res = await fetch(`${GAMERPOWER_BASE}/giveaways?platform=pc`, {
-      headers: { 'Accept': 'application/json' },
+      headers: {
+        'Accept': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+      },
       signal: AbortSignal.timeout(10000)
     });
     if (!res.ok) throw new Error(`GamerPower HTTP ${res.status}`);

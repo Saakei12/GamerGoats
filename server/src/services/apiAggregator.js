@@ -1,4 +1,5 @@
 import { curatedGames } from './curatedGames.js';
+import { fallbackFreeGames } from './fallbackFreeGames.js';
 import { fetchAllSteamGames } from './steamGames.js';
 import { fetchFreeToGameList, fetchFreeToGameDetail } from './freetogame.js';
 import { fetchGamerPowerGiveaways } from './gamerpower.js';
@@ -40,6 +41,7 @@ class ApiAggregator {
     this.lastSync = null;
     this.isSyncing = false;
     this.detailCache = new Map();
+    this.initPromise = null;
   }
 
   normalizeTitle(title) {
@@ -142,16 +144,24 @@ class ApiAggregator {
   }
 
   async init() {
-    // Populate immediately with curated games while external sync runs
-    for (const game of curatedGames) {
+    // Populate immediately with curated games and verified free games while external sync runs
+    const initialSeed = [...curatedGames, ...fallbackFreeGames];
+    for (const game of initialSeed) {
       const withRatings = { ...game, ratings: computeCrossWebRatings(game) };
       this.gamesById.set(game.id, withRatings);
       if (game.slug) this.gamesBySlug.set(game.slug, withRatings);
     }
-    this.games = curatedGames.map(g => ({ ...g, ratings: computeCrossWebRatings(g) }));
+    this.games = initialSeed.map(g => ({ ...g, ratings: computeCrossWebRatings(g) }));
 
-    // Background sync external APIs
+    // Sync external APIs
     await this.syncAll();
+  }
+
+  async ensureInitialized() {
+    if (!this.initPromise) {
+      this.initPromise = this.init();
+    }
+    return this.initPromise;
   }
 
   getClassics(limit = 12) {

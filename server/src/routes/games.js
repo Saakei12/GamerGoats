@@ -4,6 +4,16 @@ import { ALL_TAG_CATEGORIES, ALL_AVAILABLE_TAGS } from '../services/recommendati
 
 const router = Router();
 
+// Middleware: Ensure aggregator is initialized before handling requests
+router.use(async (req, res, next) => {
+  try {
+    await aggregator.ensureInitialized();
+  } catch (err) {
+    console.error('[Aggregator] Route initialization error:', err);
+  }
+  next();
+});
+
 // Get tag categories
 router.get('/tags', (req, res) => {
   res.json({
