@@ -283,7 +283,52 @@ class ApiAggregator {
   }
 
   async getGameById(id) {
-    let game = this.gamesById.get(id) || this.gamesBySlug.get(id);
+    if (!id) return null;
+    const rawId = String(id).trim();
+    const cleanId = decodeURIComponent(rawId).trim();
+    const cleanLower = cleanId.toLowerCase();
+    const slugified = cleanLower.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const cleanAlpha = cleanLower.replace(/[^a-z0-9]/g, '');
+
+    // 1. Direct Map lookup (by ID or Slug)
+    let game = this.gamesById.get(rawId) ||
+               this.gamesById.get(cleanId) ||
+               this.gamesBySlug.get(rawId) ||
+               this.gamesBySlug.get(cleanId) ||
+               this.gamesById.get(cleanLower) ||
+               this.gamesBySlug.get(cleanLower) ||
+               this.gamesById.get(slugified) ||
+               this.gamesBySlug.get(slugified);
+
+    // 2. Normalized alphanumeric match against all game IDs, slugs, and titles
+    if (!game && cleanAlpha) {
+      game = this.games.find(g => {
+        const idAlpha = String(g.id || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const slugAlpha = String(g.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const titleAlpha = String(g.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        return idAlpha === cleanAlpha || slugAlpha === cleanAlpha || titleAlpha === cleanAlpha;
+      });
+    }
+
+    // 3. Prefix or fuzzy token match against titles
+    if (!game && cleanAlpha.length >= 3) {
+      game = this.games.find(g => {
+        const titleAlpha = String(g.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        return titleAlpha.startsWith(cleanAlpha) || titleAlpha.includes(cleanAlpha);
+      });
+    }
+
+    // 4. Token search across title words
+    if (!game) {
+      const words = cleanLower.split(/\s+/).filter(w => w.length > 2);
+      if (words.length > 0) {
+        game = this.games.find(g => {
+          const titleLower = String(g.title || '').toLowerCase();
+          return words.every(word => titleLower.includes(word));
+        });
+      }
+    }
+
     if (!game) return null;
 
     // Multi-source enrichment for screenshots, background, and logos

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Bookmark, Flame, Monitor, Star, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ArrowRight, Bookmark, Sparkles, Monitor, Star, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import type { Game } from '../types/game';
 import { usePreferences } from '../context/PreferencesContext';
 
@@ -102,8 +102,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ games }) => {
             {/* Top Badges */}
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-sm">
-                <Flame className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                Trending Game #{currentIndex + 1}
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                FEATURED DISCOVERY #{currentIndex + 1}
               </span>
 
               {currentGame.rating && (
@@ -154,7 +154,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ games }) => {
             {/* Call to Action Buttons */}
             <div className="flex items-center gap-3 pt-2">
               <Link
-                to={`/game/${currentGame.id}`}
+                to={`/game/${currentGame.slug || currentGame.id}`}
                 className="group/btn relative flex items-center gap-2.5 px-6 py-3.5 rounded-full text-sm font-semibold bg-white hover:bg-zinc-200 text-black shadow-xl hover:shadow-white/10 transition-all transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
               >
                 <Play className="w-4 h-4 fill-black" />

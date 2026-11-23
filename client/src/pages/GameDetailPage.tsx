@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ExternalLink,
@@ -15,10 +15,11 @@ import {
   ChevronLeft,
   Gift,
   CheckCircle2,
-  Share2
+  Share2,
+  Search
 } from 'lucide-react';
 import type { Game } from '../types/game';
-import { fetchGameDetail, fetchGamesByGenre } from '../services/api';
+import { fetchGameDetail, fetchGamesByGenre, searchGames, fetchTrendingGames } from '../services/api';
 import { usePreferences } from '../context/PreferencesContext';
 import { ScreenshotLightbox } from '../components/ScreenshotLightbox';
 import { GameCard } from '../components/GameCard';
@@ -27,10 +28,13 @@ import { RatingBreakdownWidget } from '../components/RatingBreakdownWidget';
 
 export const GameDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { isBookmarked, toggleBookmark, userTags } = usePreferences();
 
   const [game, setGame] = useState<Game | null>(null);
   const [similarGames, setSimilarGames] = useState<Game[]>([]);
+  const [fallbackGames, setFallbackGames] = useState<Game[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState<string>('');
   const [copied, setCopied] = useState(false);
@@ -58,6 +62,19 @@ export const GameDetailPage: React.FC = () => {
             const similar = await fetchGamesByGenre(data.genres[0], 6);
             if (isMounted) {
               setSimilarGames(similar.filter((g) => g.id !== data.id).slice(0, 4));
+            }
+          }
+        } else if (isMounted) {
+          // Game not found by direct lookup - trigger fallback catalog search
+          const cleanQuery = decodeURIComponent(id).replace(/[-_]/g, ' ').trim();
+          setSearchQuery(cleanQuery);
+          const searchResult = await searchGames({ q: cleanQuery, limit: 8 });
+          if (isMounted) {
+            if (searchResult.games && searchResult.games.length > 0) {
+              setFallbackGames(searchResult.games);
+            } else {
+              const trending = await fetchTrendingGames(8);
+              if (isMounted) setFallbackGames(trending);
             }
           }
         }
@@ -95,16 +112,110 @@ export const GameDetailPage: React.FC = () => {
   }
 
   if (!game) {
+    const rawQuery = decodeURIComponent(id || '').replace(/[-_]/g, ' ').trim();
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-white">Game Not Found</h2>
-        <p className="text-sm text-zinc-400">The game you are looking for does not exist or has been moved.</p>
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-xs font-semibold hover:bg-zinc-700 transition-colors"
-        >
-          <ChevronLeft className="w-4 h-4" /> Return to Discover
-        </Link>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+        <SeoHead
+          title={`Search "${rawQuery || 'Game'}" - GamerGoats`}
+          description={`Explore games matching "${rawQuery}" on GamerGoats. Discover free games, AAA hits, and PC classics.`}
+        />
+
+        {/* Not Found Hero / Search Banner */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-zinc-900 to-[#121215] border border-white/10 p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-2xl">
+          <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto shadow-inner">
+            <Search className="w-8 h-8" />
+          </div>
+
+          <div className="space-y-2">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-zinc-800 text-zinc-300 border border-zinc-700">
+              Game Not Found
+            </span>
+            <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+              No exact match for &ldquo;<span className="text-emerald-400">{rawQuery || 'this game'}</span>&rdquo;
+            </h1>
+            <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto">
+              We couldn&apos;t find an exact game page for this title. Search our catalog of 500+ verified PC games below or explore recommended titles:
+            </p>
+          </div>
+
+          {/* Interactive Search Box */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+              }
+            }}
+            className="flex items-center gap-2 max-w-xl mx-auto bg-black/60 border border-white/15 rounded-2xl p-2 focus-within:border-emerald-500/60 transition-colors shadow-inner"
+          >
+            <Search className="w-5 h-5 text-zinc-500 ml-3 shrink-0" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by title, genre, or keyword..."
+              className="w-full bg-transparent text-sm text-white placeholder:text-zinc-500 px-2 py-2 focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition-colors shrink-0 cursor-pointer shadow-md"
+            >
+              Search
+            </button>
+          </form>
+
+          {/* Quick Genre Links */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+            {['Action', 'RPG', 'Shooter', 'Open World', 'Free to Play', 'Indie'].map((cat) => (
+              <Link
+                key={cat}
+                to={`/search?genre=${encodeURIComponent(cat)}`}
+                className="px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-900/90 text-zinc-300 hover:text-white hover:bg-zinc-800 border border-white/5 transition-colors"
+              >
+                {cat}
+              </Link>
+            ))}
+          </div>
+
+          <div className="pt-2">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-xs text-zinc-400 hover:text-white transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" /> Return to Discover Homepage
+            </Link>
+          </div>
+        </div>
+
+        {/* Fallback Suggestions Grid */}
+        {fallbackGames.length > 0 && (
+          <div className="space-y-6 pt-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-emerald-400" />
+                  Recommended Games Matching &ldquo;{rawQuery}&rdquo;
+                </h2>
+                <p className="text-xs text-zinc-400 mt-1">
+                  Popular and relevant titles discovered in our catalog
+                </p>
+              </div>
+
+              <Link
+                to={rawQuery ? `/search?q=${encodeURIComponent(rawQuery)}` : '/search'}
+                className="text-xs text-emerald-400 hover:underline font-semibold"
+              >
+                Browse All Games →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {fallbackGames.map((g) => (
+                <GameCard key={g.id} game={g} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   }

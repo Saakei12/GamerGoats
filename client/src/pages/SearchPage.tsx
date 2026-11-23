@@ -257,15 +257,48 @@ export const SearchPage: React.FC = () => {
         {loading ? (
           Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
         ) : games.length === 0 ? (
-          <div className="col-span-full py-20 text-center space-y-3">
-            <p className="text-zinc-200 text-base font-bold">No games match your search criteria.</p>
-            <p className="text-xs text-zinc-400">Try adjusting your filters or search keywords.</p>
-            <button
-              onClick={clearFilters}
-              className="px-5 py-2.5 rounded-full bg-zinc-800 text-white text-xs font-semibold hover:bg-zinc-700 transition-colors mt-2 cursor-pointer shadow-md"
-            >
-              Clear Filters
-            </button>
+          <div className="col-span-full py-16 px-4 text-center space-y-5 rounded-2xl bg-[#121215]/60 border border-white/5 my-4">
+            <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-white/10 text-zinc-400 flex items-center justify-center mx-auto">
+              <Search className="w-6 h-6 text-zinc-500" />
+            </div>
+            <div className="space-y-1">
+              <p className="text-zinc-200 text-base font-bold">
+                {query ? `No games found matching "${query}"` : 'No games match your current filter combination.'}
+              </p>
+              <p className="text-xs text-zinc-400 max-w-md mx-auto">
+                Check for typos, broaden your search keywords, or try exploring top genres below:
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2 max-w-xl mx-auto pt-1">
+              {['Action', 'RPG', 'Shooter', 'Open World', 'Free to Play', 'Indie', 'Survival'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setQuery('');
+                    if (cat === 'Free to Play') {
+                      setFreeFilter('free');
+                      setSelectedGenre('All');
+                    } else {
+                      setSelectedGenre(cat);
+                      setFreeFilter('all');
+                    }
+                  }}
+                  className="px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              <button
+                onClick={clearFilters}
+                className="px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-colors cursor-pointer shadow-md"
+              >
+                Reset All Filters
+              </button>
+            </div>
           </div>
         ) : (
           games.map((game) => (
