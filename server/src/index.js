@@ -1,9 +1,15 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { config } from './config.js';
 import gamesRouter from './routes/games.js';
 import sitemapRouter from './routes/sitemap.js';
 import { aggregator } from './services/apiAggregator.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
 
 const app = express();
 
@@ -22,6 +28,19 @@ app.get('/api/health', (req, res) => {
     totalGames: aggregator.games.length,
     lastSync: aggregator.lastSync,
     uptime: process.uptime()
+  });
+});
+
+// Serve frontend static build in production
+app.use(express.static(clientDistPath));
+
+// Fallback to React index.html for Single Page Application client-side routing
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path === '/sitemap.xml' || req.path === '/robots.txt') {
+    return next();
+  }
+  res.sendFile(path.join(clientDistPath, 'index.html'), (err) => {
+    if (err) next();
   });
 });
 
