@@ -1,0 +1,7 @@
+# GamerGoats Robots.txt for Google Search Engine and Web Crawlers
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://gamergoats.com/sitemap.xml
+
